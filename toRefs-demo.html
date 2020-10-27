@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import {reactive, effect, toRefs} from './index.js';
+
+        function useProduct() {
+            const production = reactive({
+                name: 'apple',
+                price: 2.5,
+                count: 2,
+            })
+            return toRefs(production);
+        }
+        
+        const {price, count} = useProduct();
+
+        let totalPrice = 0;
+
+        effect(() => {
+            totalPrice = price.value * count.value;
+        })
+        console.log(totalPrice);
+
+        price.value = 3;
+        console.log(totalPrice);
+
+        count.value = 1;
+        console.log(totalPrice);
+    </script>
+</body>
+</html>

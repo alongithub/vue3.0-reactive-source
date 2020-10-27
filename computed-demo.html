@@ -1,0 +1,39 @@
+<!--
+ * @Description: 
+ * @Author: sunwenlong
+ * @Date: 2020-10-27 09:21:54
+ * @LastEditors: sunwenlong
+ * @LastEditTime: 2020-10-27 09:23:01
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import {reactive, effect, computed} from './index.js';
+
+        const production = reactive({
+            name: 'apple',
+            price: 2.5,
+            count: 2,
+        })
+
+        let totalPrice = computed(() => {
+            return production.price * production.count;
+        });
+
+        console.log(totalPrice.value);
+
+        production.price = 3;
+        console.log(totalPrice.value);
+
+        production.count = 1;
+        console.log(totalPrice.value);
+    </script>
+</body>
+</html>
